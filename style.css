@@ -1,0 +1,153 @@
+* {/*reseta o css do navegador*/
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;/*ajusta o tamanho da caixa a partir da borda*/
+}
+
+/*o root coloca as configurações que contém dentro dele, na raiz do 
+HTML*/
+:root {
+--card-title-border-color: #746615;/*variavel de cor da borda do titulo*/
+--card-color-primary: #f7dd43;/*variavel cor da borda de baixo*/
+--card-bg-color: #1d1c19;/*variavel cor do funda*/
+--bg: url(./assets/bg-yellow.svg);
+}
+
+body.blue {/*padrão de cor da classe blue*/
+--card-title-border-color: #338AF3;
+--card-color-primary: #338AF3;
+--card-bg-color: #202024;/*variavel cor do funda*/
+--bg: url(./assets/bg-blue.svg); 
+}
+
+body.green {
+--card-title-border-color: #047C3F;
+--card-color-primary: #047C3F; 
+--card-bg-color: #1a1f1b;/*variavel cor do funda*/
+--bg: url(./assets/bg-green.svg); /*variavel do fundo da pagina*/ 
+}
+
+ul {
+  list-style: none;/*tira o pontinho da lista*/
+}
+
+body {
+  background: #121214 var(--bg) no-repeat top center/cover;/*ajustando a variavel da cor de fundo, para não repetir o plano de fundo, para centralizar o plano de fundo e o cover para o fundo preencher a tela toda*/
+}
+
+body * {/*seleciona todos os elementos do body*/
+  font-family: 'Roboto', sans-serif;/*fonte importada do google fonts*/
+}
+
+#app {/*caixa com o conteúdo todo*/
+  width: fit-content;/*ajusta o conteúdo na caixa*/
+  margin: auto;/*52px em cima e espaço igual nas laterais*/
+  padding-top: 52px;
+}
+
+header {
+  margin-bottom: 63px;/*margem em baixo dalogo*/
+  text-align: center;
+}
+
+#cards {
+  display: flex;/*coloca um elemento ao lado do outro*/
+  flex-direction: column;/*alinha os elementos em colunas*/
+  gap: 32px;/*espaço entre os elementos*/
+}
+
+.card {/* caixa com bandeiras data e horário*/
+  padding: 32px 23px;/*32px em cima e 23 em cada lateral*/
+  text-align: center;/*alinha os elementos ao centro da caixa*/
+  background: var(--card-bg-color);/*copia do Figma*/
+  border-bottom: 2px solid var(--card-color-primary);/*copia do Figma*/
+  border-radius: 6px;
+}
+
+.card h2 {/*ajuste da caixa da data*/
+  display: flex;/*libera as funções de gap e justify-content*/
+  gap: 16px;/*espaço entre os dois elementos*/
+  justify-content: center;/*alinha os elementos ao centro*/
+  align-items: center;/*alinha os elementos ao centro*/
+  
+  padding: 8px 16px;
+  border: 1px solid var(--card-title-border-color);
+  border-radius: 6px;
+
+  width: fit-content;/*ajusta o tamanho da caixa de acordo com o tamanho do conteudo*/
+  margin-inline: auto;/*deixa as margens da linha horizontal iguais, ou seja das laterais*/
+  margin-bottom: 53px;/*margem embaixo da caixa*/
+
+  color: #f7dd43;
+}
+
+.card h2 span {/*ajuste do dia da semana*/
+  color: #E1E1E6;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.card ul {/*ajuste de todas as listas*/
+  display: flex;/*alinha os elementos na horizontal e habilita o flex-direction e o gap*/
+  flex-direction: column;/*organiza em colunas*/
+  gap: 24px;/*espaçamento entre as listas*/
+  width: 270px;/*largura da caixa*/
+}
+
+.card ul li {
+  display: flex;/*habilita outras funções*/
+  align-items: center;
+  justify-content: space-between;/*espaçamento igual entre os elementos*/
+}
+
+.card ul li + li {/*seleciona um li que tenha outro li antes dele*/
+  padding-top: 24px;
+  border-top: 1px solid #323238;
+}
+
+.card ul li strong {/*ajuste do horario entre as bandeiras*/
+  font-weight: 900;/*peso da fonte*/
+  font-size: 36px;
+  line-height: 125%;/*altura da linha*/
+
+  color: #E1E1E6;
+}
+
+/*faz a bandeira e o horario e a data terem um efeito quando passar o mouse em cima*/
+.card h2:hover,
+.card ul li img:hover,
+.card ul li strong:hover {
+  transform: scale(1.1);
+}
+/*faz a bandeira e o horario e a data terem um efeito quando passar o mouse em cima*/
+.card h2,
+.card ul li strong,
+.card ul li img {
+  transition: transform 0.3s;
+}
+
+.card {  /*duração da animação*/
+  opacity: 0;
+  animation: appear 0.2s forwards;
+}
+
+/* regras de controle de animação da página*/
+@keyframes appear {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/*regras de css responsivo da página*/
+@media (min-width: 700px) {/*a partir de 700px, aplicar o css abaixo*/
+  #cards {
+    max-width: 670px;/*largura máxima para o card*/
+    flex-direction: row;/*faz os cartões ficarem em linha horizontal até 670px*/
+    flex-wrap: wrap;/*mantém os cards dentro dos 670px, o que passar é jogado para a linha de baixo*/
+  }
+}
